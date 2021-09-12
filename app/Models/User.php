@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
+
 class User extends Authenticatable implements JWTSubject
 {
     use HasFactory, Notifiable;
@@ -18,9 +19,13 @@ class User extends Authenticatable implements JWTSubject
      * @var array
      */
     protected $fillable = [
-        'name',
+        'first_name',
+        'last_name',
+        'username',
+        'account_type',
         'email',
         'password',
+        'pin'
     ];
 
     /**
@@ -30,6 +35,7 @@ class User extends Authenticatable implements JWTSubject
      */
     protected $hidden = [
         'password',
+        'pin',
         'remember_token',
     ];
 
@@ -42,11 +48,6 @@ class User extends Authenticatable implements JWTSubject
         'email_verified_at' => 'datetime',
     ];
 
-     /**
-     * Get the identifier that will be stored in the subject claim of the JWT.
-     *
-     * @return mixed
-     */
     public function getJWTIdentifier()
     {
         return $this->getKey();
@@ -60,5 +61,9 @@ class User extends Authenticatable implements JWTSubject
     public function getJWTCustomClaims()
     {
         return [];
+    }
+
+    public function account(){
+        return $this->hasOne(User::class,'user_id');
     }
 }
