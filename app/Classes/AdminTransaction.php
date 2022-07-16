@@ -5,7 +5,7 @@ namespace App\Classes;
 use App\Http\Controllers\AuthController;
 use App\Http\Requests\CreditRequest;
 use App\Http\Requests\TransactionHistoryRequest;
-use App\Models\Account;
+use App\Models\Account;  
 use App\Models\TransactionHistory;
 use App\Models\User;
 use Illuminate\Http\Request;
